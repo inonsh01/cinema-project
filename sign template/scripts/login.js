@@ -33,6 +33,7 @@ function logInCheck(event) {
 function welcomePage(username, password) {
   let currentUser = { username: username, password: password, highScore: null };
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  //location.replace("../pages/main.html");
+  main.innerHTML = "";
+  location.hash = "#home-page";
+  main.appendChild(templates[1].content.cloneNode(true));
 }
-
