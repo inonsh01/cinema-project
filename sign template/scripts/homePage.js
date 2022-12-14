@@ -1,5 +1,6 @@
 let signOutBtn = document.createElement("a")
-signOutBtn.innerHTML = "click here to sign out"
+signOutBtn.innerHTML = "click here to sign out";
+signOutBtn.style.cursor = "pointer";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
@@ -28,9 +29,6 @@ function draw(array) {
 
 draw([])
 
-
-
-
 let chairs = []
 function choose() {
     console.log(this.src)
@@ -45,15 +43,6 @@ function choose() {
     console.log(chairs)
 }
 
-function signOut() {
-    localStorage.removeItem("currentUser");
-    // main.innerHTML = "";
-    // main.appendChild(templates[0].content.cloneNode(true));
-    location.reload();
-}
-
-const signOutBtn = document.getElementById("sign-out-btn");
-signOutBtn.addEventListener("click", signOut);
 const fxhttp = new FXMLHttpRequest();
 fxhttp.open("POST", "/server");
 fxhttp.send("you fucking shit");
