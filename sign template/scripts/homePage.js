@@ -1,10 +1,16 @@
 let signOutBtn = document.createElement("a")
 signOutBtn.innerHTML = "click here to sign out";
+signOutBtn.id = "sign-out-btn";
 signOutBtn.style.cursor = "pointer";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
-function draw(array) {
+
+let x = new FXMLHttpRequest()
+x.open("GET", "/server/chairs")
+x.onload = function () {
+    let chairs = JSON.parse(x.responseText);
+    let chairsArr = chairs[]
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -27,7 +33,13 @@ function draw(array) {
     main.appendChild(mainDiv);
 }
 
-draw([])
+x.send()
+
+// function draw(array) {
+
+// }
+
+// draw([])
 
 let chairs = []
 function choose() {

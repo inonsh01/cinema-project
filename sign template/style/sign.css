@@ -21,8 +21,9 @@ body {
 
 /* For the white box of the form */
 .formbox { 
-  width: 30vw;
-  height: 85vh;position: relative;
+  width: 20vw;
+  height: 75vh;
+  position: relative;
   margin: 6% auto;
   margin-top: 2%;
   background: #fff;
@@ -142,6 +143,7 @@ span {
 
 main {
   display: grid;
+  grid-template-rows: 5% 95%;
   height: 80vh;
 }
 
@@ -158,6 +160,10 @@ main {
   width: 100%;
   height: 100%;
   justify-self: center;
+}
+
+#sign-out-btn{
+  cursor: pointer;
 }
 
 a img {
