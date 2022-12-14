@@ -19,15 +19,28 @@ const server = new Server();
 
 function checkRequest(url, data, requestType){
     url = url.split("/");
+    let response;
     let request = url[url.length-1];
     if(requestType === "GET"){
         if(request == "chairs"){
-            allTakenChairs();
+            response  = allTakenChairs();
+        }
+        else if(request === "chairs/myChairs"){
+            response = getCurrentUserChair();
         }
     }
+    if(requestType === "POST"){
+        if(request == "chairs"){
+            let myChairs = getCurrentUserChair();
+            data = JSON.parse(data);
+            data.push(...myChairs);
+            setChairsUserInDB(data);
+            response = "server saved your chairs";
+        }
+    }
+    server.sendResponse(response);
 }
 
 function allTakenChairs(){
-    let allTakenChairsArr = getAllChairs();
-    server.sendResponse(allTakenChairsArr);
+    return getAllChairs();
 }

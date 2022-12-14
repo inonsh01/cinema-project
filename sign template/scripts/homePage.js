@@ -43,7 +43,7 @@ fxhttp.onload = function () {
     main.appendChild(sendButton)
 }
 
-fxhttp.send("you fucking shit");
+fxhttp.send();
 
 let chairs = []
 

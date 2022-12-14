@@ -19,30 +19,32 @@ class FXMLHttpRequest {
     }
     send(data) {
         if (this.request == "GET") {
-            setTimeout(()=>network.getPackage(this, null), 3000)
+            setTimeout(() => network.getPackage(this, null), 3000)
         }
         else if (this.request == "POST") {
 
             console.log("FAJAX send message to network");
-            setTimeout(()=>network.getPackage(this, data), 3000)
+            setTimeout(() => network.getPackage(this, data), 3000)
         }
         else if (this.request == "DELETE") {
-            setTimeout(()=>network.getPackage(this, null), 3000)
+            setTimeout(() => network.getPackage(this, null), 3000)
         }
         this.ifDone();
     }
-    responseTextFromServer(data){
+    responseTextFromServer(data) {
         console.log("FAJAX got res")
         this.responseText = data;
         this.done = true;
     }
-    ifDone(){
-        if(this.done){
-            this.onload();
+    ifDone() {
+        if (this.done) {
+            if (this.onload) {
+                this.onload();
+            }
         }
-        else{
+        else {
             console.log("wait...");
-            setTimeout(()=> this.ifDone(),500);
+            setTimeout(() => this.ifDone(), 500);
         }
     }
 }
