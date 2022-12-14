@@ -17,34 +17,42 @@ class Server {
 }
 const server = new Server();
 
-function checkRequest(url, data, requestType){
+function checkRequest(url, data, requestType) {
     url = url.split("/");
     let response;
-    let request = url[url.length-1];
-    if(requestType === "GET"){
-        if(request == "chairs"){
-
+    let request = url[url.length - 1];
+    if (requestType === "GET") {
+        if (request == "chairs") {
             let allChairs = allTakenChairs();
             let myChairs = getCurrentUserChair();
             let obj = {
-                allChairs: allChairs, 
+                allChairs: allChairs,
                 myChairs: myChairs
-            };
+            }
             response = obj;
         }
     }
-    if(requestType === "POST"){
-        if(request == "chairs"){
+    if (requestType === "POST") {
+        if (request == "chairs") {
             let myChairs = getCurrentUserChair();
             data = JSON.parse(data);
-            data.push(...myChairs);
+            if (myChairs) {
+                data.push(...myChairs);
+            }
             setChairsUserInDB(data);
-            response = allTakenChairs();
+            myChairs = getCurrentUserChair();
+            let allChairs = allTakenChairs();
+            let obj = {
+                allChairs: allChairs,
+                myChairs: myChairs
+            }
+            response = obj;
         }
     }
+    console.log(response)
     server.sendResponse(response);
 }
 
-function allTakenChairs(){
+function allTakenChairs() {
     return getAllChairs();
 }

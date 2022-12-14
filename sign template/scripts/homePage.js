@@ -27,6 +27,12 @@ function sendMyChairs() {
             draw(allChairs, myChairs);
         }
         fxhttp.send(JSON.stringify(chairs));
+        fxhttp.onload = function(){
+            let allChairs = JSON.parse(fxhttp.responseText).allChairs;
+            let myChairs = JSON.parse(fxhttp.responseText).myChairs;
+            console.log("my",myChairs,allChairs)
+            draw(allChairs, myChairs);
+        }
     }
 }
 
@@ -51,9 +57,8 @@ function signOut() {
     location.reload();
 }
 
-function draw(allChairs, myChairs) {
-    main.innerHTML = ""
-    console.log(myChairs)
+function draw(allChairs, myChairs){
+    main.innerHTML = "";
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -71,24 +76,22 @@ function draw(allChairs, myChairs) {
         img.addEventListener("click", choose);
         a.appendChild(img);
         chairsDiv.appendChild(a);
-        for (let h in myChairs) {
-            if (img.id === myChairs[h]) {
-                img.src = "/images/chair-owner.png"
-                img.removeEventListener("click", choose);
-            }
-        }
         for (let j in allChairs) {
             if (img.id === allChairs[j]) {
                 img.src = "/images/chair-after.png"
                 img.removeEventListener("click", choose);
             }
         }
-
+        for(let k in myChairs){
+            if(img.id === myChairs[k]){
+                img.src = "/images/chair-owner.png"
+            }
+        }
     }
     mainDiv.appendChild(chairsDiv);
     main.appendChild(mainDiv);
     let sendButton = document.createElement("button");
     sendButton.innerHTML = "send";
-    sendButton.addEventListener("click", () => sendMyChairs(allChairs, myChairs));
+    sendButton.addEventListener("click", sendMyChairs);
     mainDiv.appendChild(sendButton);
 }
