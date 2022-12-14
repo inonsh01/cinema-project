@@ -1,15 +1,33 @@
-class Server{
-    constructor(){
+class Server {
+    constructor() {
     }
-    getData(request, data){
+    getData(from, data) {
         this.data = data;
-        this.request = request;
+        this.from = from;
+        this.request = this.from.request;
         console.log(this.request, "  server:", data);
-        this.sendResponse();
+        checkRequest(this.from.url, this.data, this.request);
     }
-    sendResponse(){
-        this.url = "/client";
-        network.getPackage(this, "hello you get to me");
+    sendResponse(data) {
+        this.from.url = "/client";
+        this.from.sentFrom = this;
+        console.log("server sent res to network");
+        network.getPackage(this.from, JSON.stringify(data));
     }
 }
 const server = new Server();
+
+function checkRequest(url, data, requestType){
+    url = url.split("/");
+    let request = url[url.length-1];
+    if(requestType === "GET"){
+        if(request == "chairs"){
+            allTakenChairs();
+        }
+    }
+}
+
+function allTakenChairs(){
+    let allTakenChairsArr = getAllChairs();
+    server.sendResponse(allTakenChairsArr);
+}

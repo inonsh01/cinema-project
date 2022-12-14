@@ -8,30 +8,41 @@ const network = new Network();
 
 class FXMLHttpRequest {
     constructor() {
-        // this.onload;
-        // this.responseText;
-        // this.open;
-        // this.send;
+
     }
     open(request, url) {
+        console.log("FAJAX get message");
+        this.done = false;
         this.request = request;
         this.url = url;
+        this.sentFrom = this;
     }
     send(data) {
         if (this.request == "GET") {
-            network.getPackage(this, null);
+            setTimeout(()=>network.getPackage(this, null), 3000)
         }
         else if (this.request == "POST") {
-            network.getPackage(this, data);
+
+            console.log("FAJAX send message to network");
+            setTimeout(()=>network.getPackage(this, data), 3000)
         }
         else if (this.request == "DELETE") {
-            network.getPackage(this, null);
+            setTimeout(()=>network.getPackage(this, null), 3000)
         }
+        this.ifDone();
     }
     responseTextFromServer(data){
-        this.data = data;
+        console.log("FAJAX got res")
+        this.responseText = data;
+        this.done = true;
     }
-    responseText(){
-        return this.data;
+    ifDone(){
+        if(this.done){
+            this.onload();
+        }
+        else{
+            console.log("wait...");
+            setTimeout(()=> this.ifDone(),500);
+        }
     }
 }

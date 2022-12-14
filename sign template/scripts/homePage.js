@@ -6,11 +6,11 @@ main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
 
-let x = new FXMLHttpRequest()
-x.open("GET", "/server/chairs")
-x.onload = function () {
-    let chairs = JSON.parse(x.responseText);
-    let chairsArr = chairs[]
+let fxhttp = new FXMLHttpRequest()
+fxhttp.open("GET", "/server/chairs")
+fxhttp.onload = function () {
+    let chairs1 = JSON.parse(fxhttp.responseText);
+    console.log(chairs1)
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -25,23 +25,36 @@ x.onload = function () {
         img.src = "/images/chair-before.png";
         img.id = i + 1;
         img.width = 50;
+        img.addEventListener("click", choose);
         a.appendChild(img);
         chairsDiv.appendChild(a);
-        img.addEventListener("click", choose);
+        for (let j in chairs1) {
+            if (img.id === chairs1[j]) {
+                img.src = "/images/chair-after.png"
+                img.removeEventListener("click", choose);
+            }
+        }
     }
     mainDiv.appendChild(chairsDiv);
     main.appendChild(mainDiv);
+    let sendButton = document.createElement("button");
+    sendButton.innerHTML = "send";
+    sendButton.addEventListener("click", sendMyChairs)
+    main.appendChild(sendButton)
 }
 
-x.send()
-
-// function draw(array) {
-
-// }
-
-// draw([])
+fxhttp.send("you fucking shit");
 
 let chairs = []
+
+function sendMyChairs() {
+    if (!(chairs.length === 0)) {
+        let fxhttp = new FXMLHttpRequest()
+        fxhttp.open("POST", "/server/chairs");
+        fxhttp.send(JSON.stringify(chairs));
+    }
+}
+
 function choose() {
     console.log(this.src)
     if (this.src === "http://127.0.0.1:5500/images/chair-before.png") {
@@ -51,15 +64,10 @@ function choose() {
     else if (this.src === "http://127.0.0.1:5500/images/chair-userCheck.png") {
         console.log("doda")
         this.src = "/images/chair-before.png"
+        chairs.splice(chairs.indexOf(this.id), 1);
     }
     console.log(chairs)
 }
-
-const fxhttp = new FXMLHttpRequest();
-fxhttp.open("POST", "/server");
-fxhttp.send("you fucking shit");
-console.log(fxhttp.responseText());
-
 
 function signOut() {
     localStorage.removeItem("currentUser");
@@ -67,4 +75,3 @@ function signOut() {
     main.appendChild(templates[0].content.cloneNode(true));
     location.reload();
 }
-
