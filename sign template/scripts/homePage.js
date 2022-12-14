@@ -1,12 +1,16 @@
 let signOutBtn = document.createElement("a")
 signOutBtn.innerHTML = "click here to sign out";
 signOutBtn.id = "sign-out-btn";
+signOutBtn.style.cursor = "pointer";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
-const fxhttp = new FXMLHttpRequest();
-fxhttp.open("GET", "/server/chairs/myChairs");
+
+let fxhttp = new FXMLHttpRequest()
+fxhttp.open("GET", "/server/chairs")
 fxhttp.onload = function () {
+    let chairs1 = JSON.parse(fxhttp.responseText);
+    console.log(chairs1)
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -21,17 +25,35 @@ fxhttp.onload = function () {
         img.src = "/images/chair-before.png";
         img.id = i + 1;
         img.width = 50;
+        img.addEventListener("click", choose);
         a.appendChild(img);
         chairsDiv.appendChild(a);
-        img.addEventListener("click", choose);
+        for (let j in chairs1) {
+            if (img.id === chairs1[j]) {
+                img.src = "/images/chair-after.png"
+                img.removeEventListener("click", choose);
+            }
+        }
     }
     mainDiv.appendChild(chairsDiv);
     main.appendChild(mainDiv);
-    console.log(fxhttp.responseText);
+    let sendButton = document.createElement("button");
+    sendButton.innerHTML = "send";
+    sendButton.addEventListener("click", sendMyChairs)
+    main.appendChild(sendButton)
 }
-fxhttp.send(JSON.stringify([1,9,22]));
+
+fxhttp.send();
 
 let chairs = []
+
+function sendMyChairs() {
+    if (!(chairs.length === 0)) {
+        let fxhttp = new FXMLHttpRequest()
+        fxhttp.open("POST", "/server/chairs");
+        fxhttp.send(JSON.stringify(chairs));
+    }
+}
 
 function choose() {
     console.log(this.src)
@@ -42,12 +64,10 @@ function choose() {
     else if (this.src === "http://127.0.0.1:5500/images/chair-userCheck.png") {
         console.log("doda")
         this.src = "/images/chair-before.png"
+        chairs.splice(chairs.indexOf(this.id), 1);
     }
     console.log(chairs)
 }
-
-
-
 
 function signOut() {
     localStorage.removeItem("currentUser");
