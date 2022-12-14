@@ -4,9 +4,8 @@ signOutBtn.id = "sign-out-btn";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
-
 const fxhttp = new FXMLHttpRequest();
-fxhttp.open("GET", "/server/chairs");
+fxhttp.open("GET", "/server/chairs/myChairs");
 fxhttp.onload = function () {
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
@@ -30,7 +29,7 @@ fxhttp.onload = function () {
     main.appendChild(mainDiv);
     console.log(fxhttp.responseText);
 }
-fxhttp.send("you fucking shit");
+fxhttp.send(JSON.stringify([1,9,22]));
 
 let chairs = []
 

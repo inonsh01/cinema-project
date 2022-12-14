@@ -39,8 +39,11 @@ function getCurrentUserChair(){
 
 
 function getAllChairs(){
-    let users = JSON.parse(localStorage.getItem("usersChair"));
     let arr = [];
+    if(!localStorage.getItem("usersChair")){
+        return arr;
+    }
+    let users = JSON.parse(localStorage.getItem("usersChair"));
     for(let user of users){
         for(chair of user.chairs.split(",")){
             arr.push(chair);
