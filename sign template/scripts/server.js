@@ -1,3 +1,9 @@
+//if This page is reloaded
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    removeCurrentUser();
+    console.info("This page is reloaded");
+}
+
 class Server {
     constructor() {
     }
@@ -17,26 +23,34 @@ class Server {
 }
 const server = new Server();
 
-function checkRequest(url, data, requestType){
+function checkRequest(url, data, requestType) {
     url = url.split("/");
+    data = JSON.parse(data);
     let response;
-    let request = url[url.length-1];
-    if(requestType === "GET"){
-        if(request == "chairs"){
+    let request = url[url.length - 1];
+    if (requestType === "GET") {
+        if (request == "chairs") {
             let allChairs = allTakenChairs();
             let myChairs = getCurrentUserChair();
             let obj = {
                 allChairs: allChairs,
                 myChairs: myChairs
             }
-            response  = obj;
+            response = obj;
         }
     }
-    if(requestType === "POST"){
-        if(request == "chairs"){
+    else if (requestType === "DELETE") {
+        if (request == "users") {
+            removeCurrentUser();
+            response = "current user deleted";
+        }
+    }
+    else if (requestType === "POST") {
+        if (request == "chairs") {
             let myChairs = getCurrentUserChair();
-            data = JSON.parse(data);
-            data.push(...myChairs);
+            if (myChairs) {
+                data.push(...myChairs);
+            }
             setChairsUserInDB(data);
             myChairs = getCurrentUserChair();
             let allChairs = allTakenChairs();
@@ -44,13 +58,34 @@ function checkRequest(url, data, requestType){
                 allChairs: allChairs,
                 myChairs: myChairs
             }
-            response  = obj;
+            response = obj;
         }
+        else if (request == "users") {
+            if (data.type == "signUp") {
+                if (!getUsers()) {
+                    response = setUser(data);
+                }
+                else {
+                    response = ifExist(data);
+                }
+            }
+            else if (data.type == "login") {
+                let users = getUsers();
+                for (let us of users) {
+                    if (data.username == us.username) {
+                        if (data.password == us.password) {
+                            response = true;
+                        }
+                    }
+                }
+            }
+        }
+
     }
-    console.log(response)
+    console.log(response);
     server.sendResponse(response);
 }
 
-function allTakenChairs(){
+function allTakenChairs() {
     return getAllChairs();
 }

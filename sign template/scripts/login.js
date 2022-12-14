@@ -10,24 +10,24 @@ class Player {
 }
 
 function logInCheck(event) {
-  let flag = 0;
-  let username = loginForm["user-id"].value;
-  let password = loginForm["password"].value;
-  const usersSignIn = JSON.parse(localStorage.getItem("users"));
-  for (let i = 0; i < usersSignIn.length; i++) {
-    if (username == usersSignIn[i].username) {
-      if (password === usersSignIn[i].password) {
-        welcomePage(username, password);
-        flag = 1;
-      }
+  event.preventDefault();
+  let obj = {
+    username: loginForm["user-id"].value,
+    password: loginForm["password"].value,
+    type: "login"
+  }
+  let fxhttp = new FXMLHttpRequest()
+  fxhttp.open("POST", "/server/users")
+  fxhttp.onload = function () {
+    if(JSON.parse(fxhttp.responseText)){
+      welcomePage(obj.username, obj.password);
+    }
+    else{
+      alert("your user name or password are invalid");
     }
   }
-  if (flag == 0) {
-    // response.innerHTML = "your user name or password are invalid";
-    alert("your user name or password are invalid");
-    //location.reload();
-  }
-  event.preventDefault();
+  fxhttp.send(JSON.stringify(obj));
+
 }
 
 function welcomePage(username, password) {

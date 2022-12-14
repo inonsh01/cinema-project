@@ -36,8 +36,9 @@
         <form name="login-form" id="login" class="input-group" action="#">
           <input name="user-id" type="text" class="input-field" placeholder="Username" required />
           <input name="password" type="password" class="input-field" placeholder="Enter Password" required />
+          <div class="check-box-and-agree">
           <input type="checkbox" class="check-box" /><span>
-            Remember Password</span>
+            Remember Password</span></div>
           <button id="submit-login-btn" type="submit" class="submit-btn">
             Log in
           </button>
@@ -48,7 +49,7 @@
           <input type="email" name="email" class="input-field" placeholder="Email" required />
           <input type="password" name="password" class="input-field" placeholder="Enter Password" minlength="6"
           maxlength="20" required />
-          <div id="check-box-and-agree">
+          <div class="check-box-and-agree">
             <input type="checkbox" class="check-box" required />
             <span>I agree to the terms & conditions</span>
           </div>
@@ -66,7 +67,8 @@
     <script src = "../scripts/homePage.js"></script>
   </template>
   <script src="../scripts/pages.js"></script>
- <script src="../scripts/DB.js"></script>
+  <script src="../scripts/dbUsers.js"></script>
+ <script src="../scripts/dbChairs.js"></script>
  <script src="../scripts/server.js"></script>
  <script src="../scripts/network.js"></script>
  <script src="../scripts/FAJAX.js"></script>

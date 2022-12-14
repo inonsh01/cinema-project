@@ -29,6 +29,9 @@ function checkIfExist(usersArr,name,arr) {
 
 function getCurrentUserChair(){
     let users = JSON.parse(localStorage.getItem("usersChair"));
+    if(!users){
+        return;
+    }
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     for(let user of users){
         if(user.name == currentUser.username){
