@@ -31,7 +31,10 @@ function checkRequest(url, data, requestType){
     }
     if(requestType === "POST"){
         if(request == "chairs"){
-            setChairsUserInDB(JSON.parse(data));
+            let myChairs = getCurrentUserChair();
+            data = JSON.parse(data);
+            data.push(...myChairs);
+            setChairsUserInDB(data);
             response = "server saved your chairs";
         }
     }
