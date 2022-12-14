@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up & Login</title>
+  <link rel="Stylesheet" href="../style/sign.css" />
+</head>
+
+<body>
+  <h1>Welcome to the fucking bar`s aunt</h1>
+  <main id = "main">
+  </main>
+  <template>
+    <div class="hero">
+      <div class="formbox">
+        <div class="button-box">
+          <div id="toggle-div"></div>
+          <button id="toggle-login" type="button1" class="toggle-btn">
+            log In
+          </button>
+          <button id="toggle-signup" type="button" class="toggle-btn">
+            Register
+          </button>
+        </div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com" target="_blank"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/768px-Facebook_Logo_%282019%29.png" /></a>
+              <a href="https://www.twitter.com" target="_blank"><img
+              src="https://e7.pngegg.com/pngimages/804/985/png-clipart-social-media-logo-computer-icons-information-twitter-logo-media.png" /></a>
+              <a href="https://www.google.com" target="_blank"><img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/54/Google_Now_logo.webp" /></a>
+        </div>
+        <form name="login-form" id="login" class="input-group" action="#">
+          <input name="user-id" type="text" class="input-field" placeholder="Username" required />
+          <input name="password" type="password" class="input-field" placeholder="Enter Password" required />
+          <input type="checkbox" class="check-box" /><span>
+            Remember Password</span>
+          <button id="submit-login-btn" type="submit" class="submit-btn">
+            Log in
+          </button>
+        </form>
+        <form id="register" name="signup-form" class="input-group" action="#">
+          <input type="text" name="username" class="input-field" placeholder="Username" minlength="4" maxlength="20"
+          required />
+          <input type="email" name="email" class="input-field" placeholder="Email" required />
+          <input type="password" name="password" class="input-field" placeholder="Enter Password" minlength="6"
+          maxlength="20" required />
+          <div id="check-box-and-agree">
+            <input type="checkbox" class="check-box" required />
+            <span>I agree to the terms & conditions</span>
+          </div>
+          <button id="submit-signup-btn" type="submit" class="submit-btn">
+            Register
+          </button>
+          <p id="response"></p>
+        </form>
+      </div>
+    </div>
+    <script src="../scripts/signUp.js"></script>
+    <script src="../scripts/login.js"></script>
+  </template>
+  <template>
+    <script src = "../scripts/homePage.js"></script>
+  </template>
+  <script src="../scripts/pages.js"></script>
+ 
+</body>
+
+</html>
