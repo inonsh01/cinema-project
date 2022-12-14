@@ -23,10 +23,13 @@ function checkRequest(url, data, requestType){
     let request = url[url.length-1];
     if(requestType === "GET"){
         if(request == "chairs"){
-            response  = allTakenChairs();
-        }
-        else if(request === "chairs/myChairs"){
-            response = getCurrentUserChair();
+            let allChairs = allTakenChairs();
+            let myChairs = getCurrentUserChair();
+            let obj = {
+                allChairs: allChairs,
+                myChairs: myChairs
+            }
+            response  = obj;
         }
     }
     if(requestType === "POST"){
@@ -35,9 +38,16 @@ function checkRequest(url, data, requestType){
             data = JSON.parse(data);
             data.push(...myChairs);
             setChairsUserInDB(data);
-            response = "server saved your chairs";
+            myChairs = getCurrentUserChair();
+            let allChairs = allTakenChairs();
+            let obj = {
+                allChairs: allChairs,
+                myChairs: myChairs
+            }
+            response  = obj;
         }
     }
+    console.log(response)
     server.sendResponse(response);
 }
 

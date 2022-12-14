@@ -21,8 +21,8 @@ body {
 
 /* For the white box of the form */
 .formbox { 
-  width: 20vw;
-  height: 75vh;
+  width: 30vw;
+  height: 85vh;
   position: relative;
   margin: 6% auto;
   margin-top: 2%;
