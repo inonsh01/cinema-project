@@ -1,10 +1,13 @@
 let signOutBtn = document.createElement("a")
 signOutBtn.innerHTML = "click here to sign out";
-signOutBtn.style.cursor = "pointer";
+signOutBtn.id = "sign-out-btn";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
-function draw(array) {
+
+const fxhttp = new FXMLHttpRequest();
+fxhttp.open("GET", "/server/chairs");
+fxhttp.onload = function () {
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -25,11 +28,12 @@ function draw(array) {
     }
     mainDiv.appendChild(chairsDiv);
     main.appendChild(mainDiv);
+    console.log(fxhttp.responseText);
 }
-
-draw([])
+fxhttp.send("you fucking shit");
 
 let chairs = []
+
 function choose() {
     console.log(this.src)
     if (this.src === "http://127.0.0.1:5500/images/chair-before.png") {
@@ -43,10 +47,7 @@ function choose() {
     console.log(chairs)
 }
 
-const fxhttp = new FXMLHttpRequest();
-fxhttp.open("POST", "/server");
-fxhttp.send("you fucking shit");
-console.log(fxhttp.responseText());
+
 
 
 function signOut() {
@@ -55,4 +56,3 @@ function signOut() {
     main.appendChild(templates[0].content.cloneNode(true));
     location.reload();
 }
-

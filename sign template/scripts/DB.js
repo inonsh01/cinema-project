@@ -16,7 +16,6 @@ function setChairsUserInDB(arr) {
     localStorage.setItem("usersChair",JSON.stringify(usersArr));
 }
 
-
 function checkIfExist(usersArr,name,arr) {
     for (i of usersArr) {
         if (i.name == name) {

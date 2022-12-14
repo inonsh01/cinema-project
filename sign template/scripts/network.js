@@ -4,21 +4,21 @@ class Network {
     }
     getPackage(from, data) {
         this.from = from;
-        this.url = this.from.url;
-        this.request = this.from.request;
-        if(this.url == "/server"){
-            this.client = this.from;
-        }
+        this.sendTo = this.from.url.split("/")[1];
         if(data){
             this.data = data;
         }
+        console.log("network got message");
         this.sendPackage();
     }
     sendPackage() {
-        if(this.url == "/server"){
-            server.getData(this.request, this.data);
+        if(this.sendTo == "server"){
+            this.client = this.from.sentFrom;
+            console.log("network sent message to server");
+            server.getData(this.from, this.data);
         }
-        else if(this.url == "/client"){
+        else if(this.sendTo == "client"){
+            console.log("network sent res to fajax");
             this.client.responseTextFromServer(this.data);
         }
     }
