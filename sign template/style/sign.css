@@ -20,9 +20,9 @@ body {
 }
 
 /* For the white box of the form */
-.formbox { 
-  width: 20vw;
-  height: 75vh;
+.formbox {
+  width: 30vw;
+  height: 85vh;
   position: relative;
   margin: 6% auto;
   margin-top: 2%;
@@ -153,17 +153,30 @@ main {
 #mainDiv {
   display: grid;
   grid-row: 2;
+  grid-template-rows: 80% 10% 10%;
   background-color: rgba(0, 0, 0, 0.479);
   border-radius: 3%;
-  width: 33%;
+  width: 50%;
   height: 100%;
   justify-self: center;
 }
 
 #chairsDiv {
   width: 100%;
-  height: 100%;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(10, 10%);
   justify-self: center;
+  grid-auto-rows: auto;
+}
+
+#screenImg{
+  width: 100%;
+  height: 100%;
+}
+
+#sendButton {
+  grid-row: 3;
 }
 
 #sign-out-btn {
@@ -171,8 +184,10 @@ main {
   cursor: pointer;
 }
 
-a img {
+.chair {
   cursor: pointer;
-  width: 9%;
-  margin: 0.3%;
+  width: 95%;
+  height: 100%;
+  padding:  3%;
+  object-fit: fill;
 }

@@ -14,7 +14,7 @@ function choose() {
     if (this.src === "http://127.0.0.1:5500/images/chair-before.png") {
         this.src = "/images/chair-userCheck.png"
         chairs.push(this.id);
-        
+
     }
     else if (this.src === "http://127.0.0.1:5500/images/chair-userCheck.png") {
         console.log("doda")
@@ -30,18 +30,19 @@ function draw(allChairs, myChairs) {
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div");
     chairsDiv.id = "chairsDiv";
-    chairsDiv.style.background = "url(/images/hall-screen.png)";
-    chairsDiv.style.backgroundSize = "contain";
-    chairsDiv.style.backgroundPosition = "center";
-    chairsDiv.style.backgroundRepeat = "no-repeat";
-    for (let i = 0; i < 50; i++) {
+    let screenDiv = document.createElement("div");
+    screenDiv.id = "screenDiv";
+    let numOfChairs = 50;
+    let numOfRows = Math.ceil(numOfChairs / 10);
+    chairsDiv.style.gridTemplateRows = `repeat(${numOfRows},${100 / numOfRows}%)`;
+    for (let i = 0; i < numOfChairs; i++) {
         let a = document.createElement("a");
         let img = document.createElement("img");
         img.src = "/images/chair-before.png";
         img.id = i + 1;
+        img.className = "chair";
         img.addEventListener("click", choose);
-        a.appendChild(img);
-        chairsDiv.appendChild(a);
+        chairsDiv.appendChild(img);
         for (let j in allChairs) {
             if (img.id === allChairs[j]) {
                 img.src = "/images/chair-after.png"
@@ -55,8 +56,14 @@ function draw(allChairs, myChairs) {
         }
     }
     mainDiv.appendChild(chairsDiv);
+    let screenImg = document.createElement("img");
+    screenImg.src = "/images/hall-screen.png";
+    screenImg.id = "screenImg";
+    screenDiv.appendChild(screenImg);
+    mainDiv.appendChild(screenDiv);
     main.appendChild(mainDiv);
     let sendButton = document.createElement("button");
+    sendButton.id = "sendButton"
     sendButton.innerHTML = "send";
     sendButton.addEventListener("click", sendMyChairs);
     mainDiv.appendChild(sendButton);
