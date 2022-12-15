@@ -20,6 +20,8 @@ function logInCheck(event) {
   fxhttp.open("POST", "/server/users")
   fxhttp.onload = function () {
     if(JSON.parse(fxhttp.responseText)){
+      const h1 = document.getElementById("h1");
+      h1.innerHTML = `Hey ${obj.username} Welcome to Cine(hil)ma`
       welcomePage(obj.username, obj.password);
     }
     else{
