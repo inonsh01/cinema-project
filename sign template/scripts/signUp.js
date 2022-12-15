@@ -24,11 +24,18 @@ function registerUser(event) {
     email: email.value,
     type: "signUp"
   };
-  
+
   let fxhttp = new FXMLHttpRequest()
   fxhttp.open("POST", "/server/users")
   fxhttp.onload = function () {
-    response1.textContent = JSON.parse(fxhttp.responseText);
+    if (JSON.parse(fxhttp.responseText)) {
+      response1.textContent = "Username sign up successfully";
+      setTimeout(() => location.reload(), 800);
+    }
+    else {
+      response1.textContent = "Username is already exists";
+    }
+
   }
   fxhttp.send(JSON.stringify(user));
 

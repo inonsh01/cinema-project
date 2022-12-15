@@ -7,14 +7,14 @@ function getUsers() {
 function setUser(user) {
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
-    return "Username sign up successfully";
+    return true;
 }
  function ifExist(user){
     users = JSON.parse(localStorage.getItem("users"));
     let flag = false;
     for (us of users) {
         if (user.username == us.username) {
-            return "Username is already exists";
+            return false;
         }
     }
     //user does not exist in users(create new user)
