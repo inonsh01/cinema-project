@@ -5,7 +5,6 @@ signOutBtn.style.cursor = "pointer";
 main.appendChild(signOutBtn);
 signOutBtn.addEventListener("click", signOut);
 
-
 let fxhttp = new FXMLHttpRequest()
 fxhttp.open("GET", "/server/chairs")
 fxhttp.onload = function () {
@@ -27,10 +26,10 @@ function sendMyChairs() {
             draw(allChairs, myChairs);
         }
         fxhttp.send(JSON.stringify(chairs));
-        fxhttp.onload = function(){
+        fxhttp.onload = function () {
             let allChairs = JSON.parse(fxhttp.responseText).allChairs;
             let myChairs = JSON.parse(fxhttp.responseText).myChairs;
-            console.log("my",myChairs,allChairs)
+            console.log("my", myChairs, allChairs)
             draw(allChairs, myChairs);
         }
     }
@@ -51,14 +50,19 @@ function choose() {
 }
 
 function signOut() {
-    localStorage.removeItem("currentUser");
-    main.innerHTML = "";
-    main.appendChild(templates[0].content.cloneNode(true));
-    location.reload();
+    let fxhttp = new FXMLHttpRequest();
+    fxhttp.open("DELETE", "/server/users");
+    fxhttp.onload = function () {
+        main.innerHTML = "";
+        main.appendChild(templates[0].content.cloneNode(true));
+        location.reload();
+    }
+    fxhttp.send();
 }
 
-function draw(allChairs, myChairs){
+function draw(allChairs, myChairs) {
     main.innerHTML = "";
+    appendSignOut();
     let mainDiv = document.createElement("div")
     mainDiv.id = "mainDiv";
     let chairsDiv = document.createElement("div")
@@ -82,8 +86,8 @@ function draw(allChairs, myChairs){
                 img.removeEventListener("click", choose);
             }
         }
-        for(let k in myChairs){
-            if(img.id === myChairs[k]){
+        for (let k in myChairs) {
+            if (img.id === myChairs[k]) {
                 img.src = "/images/chair-owner.png"
             }
         }
@@ -94,4 +98,9 @@ function draw(allChairs, myChairs){
     sendButton.innerHTML = "send";
     sendButton.addEventListener("click", sendMyChairs);
     mainDiv.appendChild(sendButton);
+}
+
+function appendSignOut() {
+    main.appendChild(signOutBtn);
+    signOutBtn.addEventListener("click", signOut);
 }

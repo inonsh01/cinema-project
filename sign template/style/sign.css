@@ -107,14 +107,15 @@ body {
 
 /* For the check box of terms and conditions */
 .check-box {
-  margin: 30px 10px 30px;
+  height: 5%;
+  /* margin: 30px 10px 30px; */
+  width: 10%;
 }
 
 span {
   color: #777;
   font-size: 12px;
   bottom: 68px;
-  position: absolute;
 }
 
 #login {
@@ -132,13 +133,15 @@ span {
   margin-right: 250px;
 }
 
-#check-box-and-agree {
-  display: inline-block;
+.check-box-and-agree {
+  display: flex;
   width: 100%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 span {
-  top: 59%;
+  align-self: center;
 }
 
 main {
@@ -164,6 +167,7 @@ main {
 }
 
 #sign-out-btn {
+  grid-row: 1;
   cursor: pointer;
 }
 

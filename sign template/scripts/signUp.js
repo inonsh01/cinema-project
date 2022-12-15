@@ -2,13 +2,10 @@ const toggleDiv = document.getElementById("toggle-div");
 const loginToggleBtn = document.getElementById("toggle-login");
 const signupToggleBtn = document.getElementById("toggle-signup");
 const submitSignupBtn = document.getElementById("submit-signup-btn");
-const response = document.getElementById("response");
+const response1 = document.getElementById("response");
 
 const loginForm = document.forms["login-form"];
 const signupForm = document.forms["signup-form"];
-// loginForm["user-id"].value       ("user-id" - (name property))
-
-let users = [];
 
 loginToggleBtn.addEventListener("click", login);
 signupToggleBtn.addEventListener("click", signup);
@@ -25,38 +22,16 @@ function registerUser(event) {
     username: username.value,
     password: password.value,
     email: email.value,
+    type: "signUp"
   };
-
-  // No users at all.
-  if (JSON.parse(localStorage.getItem("users") === null)) {
-    if (signupForm.checkValidity()) {
-      users.push(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      location.reload();
-    }
-  } else {
-    users = JSON.parse(localStorage.getItem("users"));
-    //user with the same username already exists in localStorage
-    const checkIfUsernameExists = users.some(
-      (user) => user.username === username.value
-    );
-
-    if (checkIfUsernameExists) {
-      console.log(username.value);
-
-      response.textContent = "Username is already exists";
-
-      console.log(username.reportValidity());
-    } else {
-      //user does not exist in users(create new user)
-      users.push(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      response.textContent = "Username sign up successfully";
-      // location.reload();
-    }
+  
+  let fxhttp = new FXMLHttpRequest()
+  fxhttp.open("POST", "/server/users")
+  fxhttp.onload = function () {
+    response1.textContent = JSON.parse(fxhttp.responseText);
   }
+  fxhttp.send(JSON.stringify(user));
 
-  // signupForm.reportValidity();
 }
 
 function signup() {
