@@ -60,12 +60,6 @@ function checkRequest(url, data, requestType) {
             }
             response = obj;
         }
-        // <script>
-        // var encrypted = CryptoJS.AES.encrypt(data, "Secret Passphrase");
-        // var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
-        // // alert(encrypted);
-        // // alert(decrypted);
-        // </script>
 
         else if (request == "users") {
             if (data.type == "signUp") {
