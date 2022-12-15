@@ -21,7 +21,6 @@ class Server {
         network.getPackage(this.from, JSON.stringify(data));
     }
 }
-const server = new Server();
 
 function checkRequest(url, data, requestType) {
     url = url.split("/");
@@ -90,7 +89,6 @@ function checkRequest(url, data, requestType) {
         }
 
     }
-    console.log(response);
     server.sendResponse(response);
 }
 
