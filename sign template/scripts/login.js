@@ -24,6 +24,7 @@ function logInCheck(event) {
     }
     else{
       alert("your user name or password are invalid");
+      location.reload();
     }
   }
   fxhttp.send(JSON.stringify(obj));
