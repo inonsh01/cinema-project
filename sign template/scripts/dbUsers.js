@@ -24,4 +24,3 @@ function setUser(user) {
  function removeCurrentUser(){
     localStorage.removeItem("currentUser");
  }
-                   

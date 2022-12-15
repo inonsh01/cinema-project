@@ -40,7 +40,6 @@ function getCurrentUserChair(){
     }
 }
 
-
 function getAllChairs(){
     let arr = [];
     if(!localStorage.getItem("usersChair")){

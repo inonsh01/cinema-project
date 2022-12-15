@@ -44,7 +44,7 @@ class FXMLHttpRequest {
         }
         else {
             console.log("wait...");
-            setTimeout(() => this.ifDone(), 500);
+            setTimeout(() => this.ifDone(), 300);
         }
     }
 }

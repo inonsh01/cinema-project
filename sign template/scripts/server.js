@@ -60,8 +60,16 @@ function checkRequest(url, data, requestType) {
             }
             response = obj;
         }
+        // <script>
+        // var encrypted = CryptoJS.AES.encrypt(data, "Secret Passphrase");
+        // var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
+        // // alert(encrypted);
+        // // alert(decrypted);
+        // </script>
+
         else if (request == "users") {
             if (data.type == "signUp") {
+                data.password = CryptoJS.AES.encrypt(data.password, "Secret Passphrase").toString();
                 if (!getUsers()) {
                     response = setUser(data);
                 }
@@ -70,13 +78,19 @@ function checkRequest(url, data, requestType) {
                 }
             }
             else if (data.type == "login") {
+                let flag = false;
                 let users = getUsers();
                 for (let us of users) {
                     if (data.username == us.username) {
+                        us.password = CryptoJS.AES.decrypt(us.password, "Secret Passphrase").toString(CryptoJS.enc.Utf8);
                         if (data.password == us.password) {
                             response = true;
+                            flag = true;
                         }
                     }
+                }
+                if (!flag) {
+                    response = false;
                 }
             }
         }
