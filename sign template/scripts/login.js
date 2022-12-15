@@ -37,4 +37,5 @@ function welcomePage(username, password) {
   main.innerHTML = "";
   location.hash = "#home-page";
   main.appendChild(templates[1].content.cloneNode(true));
+  // main.appendChild(templates[2].content.cloneNode(true));
 }

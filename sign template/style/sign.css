@@ -173,5 +173,6 @@ main {
 
 a img {
   cursor: pointer;
+  width: 9%;
   margin: 0.3%;
 }

@@ -1,3 +1,4 @@
+const server = new Server();
 class Network {
     constructor() {
 
@@ -18,7 +19,7 @@ class Network {
             server.getData(this.from, this.data);
         }
         else if(this.sendTo == "client"){
-            console.log("network sent res to fajax");
+            console.log("network sent respond to fajax");
             this.client.responseTextFromServer(this.data);
         }
     }
