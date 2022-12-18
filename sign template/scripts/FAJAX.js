@@ -16,19 +16,18 @@ class FXMLHttpRequest {
         this.request = request;
         this.url = url;
         this.sentFrom = this;
-        this.timeWait = (Math.random() * 800);
     }
     send(data) {
         if (this.request == "GET") {
-            setTimeout(() => network.getPackage(this, null), this.timeWait)
+            network.getPackage(this, null);
         }
         else if (this.request == "POST") {
 
             console.log("FAJAX send message to network");
-            setTimeout(() => network.getPackage(this, data), this.timeWait)
+            network.getPackage(this, data);
         }
         else if (this.request == "DELETE") {
-            setTimeout(() => network.getPackage(this, null), this.timeWait)
+            network.getPackage(this, null);
         }
         this.ifDone();
     }

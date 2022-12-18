@@ -1,7 +1,7 @@
 const server = new Server();
 class Network {
     constructor() {
-
+        this.timeWait = (Math.random() * 800);
     }
     getPackage(from, data) {
         this.from = from;
@@ -10,7 +10,7 @@ class Network {
             this.data = data;
         }
         console.log("network got message");
-        this.sendPackage();
+        setTimeout(() => this.sendPackage(), this.timeWait)
     }
     sendPackage() {
         if(this.sendTo == "server"){
